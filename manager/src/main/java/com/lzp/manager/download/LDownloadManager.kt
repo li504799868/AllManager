@@ -1,7 +1,5 @@
 package com.lzp.manager.download
 
-import android.Manifest
-import android.support.annotation.RequiresPermission
 import okhttp3.OkHttpClient
 import java.util.concurrent.ConcurrentHashMap
 
@@ -39,7 +37,6 @@ object LDownloadManager {
      * @param url      下载连接
      * @param savePath 保存的路径
      */
-    @RequiresPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
     fun download(url: String, savePath: String): DownloadTask {
         if (okHttpClient == null) {
             throw IllegalStateException("the okhttp is null")

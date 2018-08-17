@@ -33,6 +33,8 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
     implementation 'com.squareup.okhttp3:okhttp:3.11.0'
+    // 权限申请
+    implementation 'com.yanzhenjie:permission:2.0.0-rc4'
 }
 repositories {
     mavenCentral()

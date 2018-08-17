@@ -1,16 +1,21 @@
 package com.lzp.all
 
 import android.os.Bundle
+import android.os.Environment
 import android.support.v4.app.NotificationCompat
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.widget.Toast
+import com.lzp.manager.apk.ApkManager
 import com.lzp.manager.download.LDownloadManager
 import com.lzp.manager.notification.LNotificationManager
 import kotlinx.android.synthetic.main.activity_main.*
 import okhttp3.OkHttpClient
+import java.io.File
 
 class MainActivity : AppCompatActivity() {
+
+    private val filePath = Environment.getExternalStorageDirectory().absolutePath + "/ugirls.apk"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,6 +24,10 @@ class MainActivity : AppCompatActivity() {
         downloadTest()
 
         notificationTest()
+
+        installTest()
+
+        uninstallTest()
     }
 
     private fun downloadTest() {
@@ -27,7 +36,7 @@ class MainActivity : AppCompatActivity() {
         download.setOnClickListener {
             LDownloadManager.download(
                     "https://down-sns.youguoquan.com/pkg/youguoquan/app-v2.4.9-wapugirls.apk",
-                    cacheDir.absolutePath + "ugirls.apk")
+                    filePath)
                     .start(object : LDownloadManager.OnDownloadListener {
 
                         override fun onDownloadSuccess(url: String) {
@@ -65,6 +74,26 @@ class MainActivity : AppCompatActivity() {
                     .build()
 
             LNotificationManager.sendNotification(this@MainActivity, notification, 1)
+        }
+    }
+
+    private fun installTest() {
+        install.setOnClickListener {
+            val file = File(filePath)
+            if (!file.exists()){
+                Toast.makeText(this, "请先下载文件", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+            ApkManager.installApk(this, file)
+        }
+
+    }
+
+    private fun uninstallTest() {
+        uninstall.setOnClickListener {
+            if (ApkManager.hashInstallApk(this, "com.ugirls.app02")){
+                ApkManager.uninstallApk(this, "com.ugirls.app02")
+            }
         }
     }
 }
