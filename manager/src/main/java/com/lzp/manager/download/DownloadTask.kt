@@ -143,8 +143,6 @@ class DownloadTask constructor(private val okHttpClient: OkHttpClient, private v
      * 开启任务
      * */
     fun start(listener: LDownloadManager.OnDownloadListener) {
-
-
         addListener(listener)
         start()
     }

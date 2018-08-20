@@ -30,4 +30,16 @@
         android:layout_height="wrap_content"
         android:text="uninstall" />
 
+    <Button
+        android:id="@+id/registerNet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="registerNet" />
+
+    <Button
+        android:id="@+id/unregisterNet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="unregisterNet" />
+
 </LinearLayout>

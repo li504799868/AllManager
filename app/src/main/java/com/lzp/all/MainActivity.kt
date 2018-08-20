@@ -8,6 +8,7 @@ import android.util.Log
 import android.widget.Toast
 import com.lzp.manager.apk.ApkManager
 import com.lzp.manager.download.LDownloadManager
+import com.lzp.manager.net.NetworkBroadCast
 import com.lzp.manager.notification.LNotificationManager
 import kotlinx.android.synthetic.main.activity_main.*
 import okhttp3.OkHttpClient
@@ -28,6 +29,9 @@ class MainActivity : AppCompatActivity() {
         installTest()
 
         uninstallTest()
+
+        registerNetWork()
+        unregisterNetWork()
     }
 
     private fun downloadTest() {
@@ -80,7 +84,7 @@ class MainActivity : AppCompatActivity() {
     private fun installTest() {
         install.setOnClickListener {
             val file = File(filePath)
-            if (!file.exists()){
+            if (!file.exists()) {
                 Toast.makeText(this, "请先下载文件", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
@@ -91,9 +95,23 @@ class MainActivity : AppCompatActivity() {
 
     private fun uninstallTest() {
         uninstall.setOnClickListener {
-            if (ApkManager.hashInstallApk(this, "com.ugirls.app02")){
+            if (ApkManager.hashInstallApk(this, "com.ugirls.app02")) {
                 ApkManager.uninstallApk(this, "com.ugirls.app02")
             }
         }
     }
+
+    private fun registerNetWork() {
+        registerNet.setOnClickListener {
+            NetworkBroadCast.register(this, netEventHandler)
+        }
+    }
+
+    private fun unregisterNetWork() {
+        unregisterNet.setOnClickListener {
+            NetworkBroadCast.unregister(netEventHandler)
+        }
+    }
+
+    private val netEventHandler = NetworkBroadCast.NetEventHandler { netWorkType -> Toast.makeText(this@MainActivity, "netWorkType:$netWorkType", Toast.LENGTH_SHORT).show() }
 }
