@@ -30,6 +30,10 @@ object ApkManager {
      * 8.0以上请手动申请权限 Manifest.permission.REQUEST_INSTALL_PACKAGES
      * */
     fun installApk(context: Context, file: File) {
+        // 判断权限
+        if (!hasInstallApkPermission(context)) {
+            return
+        }
         val intent = Intent(Intent.ACTION_VIEW)
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         // 判断
