@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">manager</string>
+    <string name="permission_notification">通知权限</string>
 </resources>

@@ -33,7 +33,7 @@ object LDownloadManager {
     }
 
     /**
-     *  创建下载任务，需要读写sd卡权限
+     *  创建下载任务，请自行判断是否需要读写sd卡权限
      * @param url      下载连接
      * @param savePath 保存的路径
      */

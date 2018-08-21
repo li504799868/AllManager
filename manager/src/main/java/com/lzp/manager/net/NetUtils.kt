@@ -4,7 +4,7 @@ import android.Manifest
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
-import com.yanzhenjie.permission.AndPermission
+import com.lzp.manager.util.PermissionUtils
 
 /**
  * Created by li.zhipeng on 2018/6/28.
@@ -23,7 +23,7 @@ object NetUtils {
      * */
     fun getNetworkType(context: Context): Int {
         // 检查一下权限
-        if (AndPermission.hasPermission(context,
+        if (PermissionUtils.hasPermission(context,
                         Manifest.permission.ACCESS_NETWORK_STATE,
                         Manifest.permission.INTERNET)) {
             val connManager = context

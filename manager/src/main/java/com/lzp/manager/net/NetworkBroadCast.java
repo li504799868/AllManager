@@ -13,7 +13,7 @@ import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.util.Log;
 
-import com.yanzhenjie.permission.AndPermission;
+import com.lzp.manager.util.PermissionUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -75,17 +75,17 @@ public class NetworkBroadCast extends BroadcastReceiver {
     public static void register(final Context context, final NetEventHandler netEventHandler) {
         // 判断是否已经注册了网络监听
         // 如果已经注册了，直接添加监听函数即可
-        Log.e("lzp", "添加网络监听");
+        Log.i("lzp", "添加网络监听");
         if (hasRegisterNetwork) {
             mListeners.add(netEventHandler);
             return;
         }
 
-        Log.e("lzp", "开始注册广播");
+        Log.i("lzp", "开始注册广播");
         // 需要注册广播
         applicationContext = context.getApplicationContext();
         // 判断是否拥有权限
-        if (AndPermission.hasPermission(context,
+        if (PermissionUtils.INSTANCE.hasPermission(context,
                 Manifest.permission.ACCESS_NETWORK_STATE,
                 Manifest.permission.INTERNET)) {
             //安卓5.0以上使用新的api进行监听
