@@ -1,6 +1,8 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
+apply plugin: 'com.novoda.bintray-release'
+
 android {
     compileSdkVersion 28
 
@@ -8,7 +10,7 @@ android {
         minSdkVersion 15
         targetSdkVersion 28
         versionCode 1
-        versionName "1.0"
+        versionName "1.0.0"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -34,6 +36,21 @@ dependencies {
 
     implementation 'com.squareup.okhttp3:okhttp:3.11.0'
 }
+
+sourceSets {
+    main.java.srcDirs += 'src/main/kotlin'
+}
+
+// jcenter发布的信息
+publish {
+    userOrg = 'lizp' // 创建repo的位置
+    groupId = 'com.lzp' // 引用的分组名称
+    artifactId = 'AllManager'//项目名称
+    publishVersion = '1.0.0'//版本号
+    desc = 'desc'
+    website = ''
+}
+
 repositories {
     mavenCentral()
 }
