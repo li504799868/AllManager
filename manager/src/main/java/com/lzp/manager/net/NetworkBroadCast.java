@@ -33,11 +33,30 @@ public class NetworkBroadCast extends BroadcastReceiver {
      */
     private static volatile boolean hasRegisterNetwork;
 
+    private static ConnectivityManager.NetworkCallback callback;
+
     @SuppressLint("StaticFieldLeak")
     private static NetworkBroadCast instance;
 
     private static synchronized NetworkBroadCast getInstance() {
-        instance = new NetworkBroadCast();
+        if (instance == null) {
+            instance = new NetworkBroadCast();
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                callback = new ConnectivityManager.NetworkCallback() {
+                    @Override
+                    public void onAvailable(Network network) {
+                        super.onAvailable(network);
+                        setNetWordState();
+                    }
+
+                    @Override
+                    public void onLost(Network network) {
+                        super.onLost(network);
+                        setNetWordState();
+                    }
+                };
+            }
+        }
         return instance;
     }
 
@@ -196,23 +215,6 @@ public class NetworkBroadCast extends BroadcastReceiver {
             }
         }
     }
-
-    /**
-     *
-     */
-    private static ConnectivityManager.NetworkCallback callback = new ConnectivityManager.NetworkCallback() {
-        @Override
-        public void onAvailable(Network network) {
-            super.onAvailable(network);
-            setNetWordState();
-        }
-
-        @Override
-        public void onLost(Network network) {
-            super.onLost(network);
-            setNetWordState();
-        }
-    };
 
     public interface NetEventHandler {
 
