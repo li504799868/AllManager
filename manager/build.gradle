@@ -46,7 +46,7 @@ publish {
     userOrg = 'lizp' // 创建repo的位置
     groupId = 'com.lzp' // 引用的分组名称
     artifactId = 'AllManager'//项目名称
-    publishVersion = '1.0.0'//版本号
+    publishVersion = '1.0.1'//版本号
     desc = '提供安装、卸载、下载、通知、网络监听的工具类'
     website = 'https://github.com/li504799868/AllManager'
 }
