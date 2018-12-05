@@ -39,4 +39,4 @@ task clean(type: Delete) {
 }
 
 //非常重要要不它不认识你的项目.kt文件名 其中chart是你的library名
-//tasks.getByPath(":manager:releaseAndroidJavadocs").enabled = false
+tasks.getByPath(":manager:javadocRelease").enabled = false
